@@ -3,7 +3,7 @@
     internal static class Program
     {
         public static string inputString = "";
-        public static int inputMenu = 0;
+        public static int inputNum = 0;
         public static List<int> myIntNum = new List<int>();
 
          static void Main(string[] args)
@@ -13,7 +13,7 @@
             {
                 SetMenu();
 
-                if (int.TryParse(inputString, out _))
+                if (int.TryParse(inputString, out _) && int.Parse(inputString) >= 0 && int.Parse(inputString) <= 10)
                 {
                     switch (int.Parse(inputString))
                     {
@@ -34,26 +34,12 @@
                             break;
                         case 4:
                             {
-                                Console.WriteLine("please enter the index of number want to Remove!");
-                                inputString = Console.ReadLine();
-                                if (int.TryParse(inputString, out int inputNumber))
-                                {
-                                    myIntNum.RemoveAt(inputNumber);
-                                    Console.WriteLine("the index of {0} succesfully removed", inputNumber);
-                                    Console.ReadKey();
-                                }
-                                else
-                                {
-                                    Console.WriteLine("please enter the valid index!");
-                                    Console.ReadKey();
-                                    continue;
-                                }
+                                RemoveNumberFromIndex();
                             }
                             break;
                         case 5:
                             {
-                                Console.WriteLine("the Biggest number stored is {0}", ShowBiggestIntNum());
-                                Console.ReadKey();
+                                ShowBiggestIntNum();
                             }
                             break;
                         case 6:
@@ -116,7 +102,7 @@
             Console.WriteLine("PRESS(8)------Sort the element by low to high.");
             Console.WriteLine("PRESS(9)------Show all element between two number you entered.");
             Console.WriteLine("PRESS(10)------Edit your int number.");
-            Console.WriteLine("PRESS(01)------Exit from APP.");
+            Console.WriteLine("PRESS(0)------Exit from APP.");
             Console.Write("which option do you want : ");
             inputString = Console.ReadLine();
         }
@@ -171,28 +157,66 @@
                 Console.ReadKey();
             }
         }
-        public static int ShowBiggestIntNum()
+        public static void RemoveNumberFromIndex()
         {
             if (myIntNum.Count == 0)
             {
                 Console.WriteLine("The list is empty!");
+                Console.ReadKey();
             }
-            int max = int.MinValue;
-            foreach (int number in myIntNum)
+            else
             {
-
-                if (number > max)
+                Console.Write("please enter the index of number want to Remove : ");
+                inputString = Console.ReadLine();
+                if (int.TryParse(inputString, out _))
                 {
-                    max = number;
+                    myIntNum.RemoveAt(int.Parse(inputString));
+                    Console.WriteLine("the index of {0} succesfully removed", int.Parse(inputString));
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("please enter the valid index!");
+                    Console.ReadKey();
+                    RemoveNumberFromIndex();
                 }
             }
-            return max;
+
+        }
+        public static void ShowBiggestIntNum()
+        {
+            if (myIntNum.Count == 0)
+            {
+                Console.WriteLine("The list is empty!");
+                Console.ReadKey();
+            }
+            else
+            {
+                int max = 0;
+                foreach (int number in myIntNum)
+                {
+
+                    if (number > max)
+                    {
+                        max = number;
+                    }
+                }
+                Console.WriteLine("the Biggest number stored is {0}", max);
+                Console.ReadKey();
+            }
+
         }
         public static void ShowLowestIntNum()
         {
-            int min = int.MaxValue;
-            if (myIntNum.Count != 0)
+            
+            if (myIntNum.Count == 0)
             {
+                Console.WriteLine("The list is empty!");
+                Console.ReadKey();
+            }
+            else
+            {
+                int min = int.MaxValue;
                 foreach (int number in myIntNum)
                 {
 
@@ -202,11 +226,6 @@
                     }
                 }
                 Console.WriteLine("the Lowest number stored is {0}", min);
-                Console.ReadKey();
-            }
-            else
-            {
-                Console.WriteLine("your list is empty!");
                 Console.ReadKey();
             }
         }
