@@ -24,26 +24,12 @@
                             break;
                         case 2:
                             {
-                                Console.WriteLine("please enter the index of number do you want to Show");
-                                inputString = Console.ReadLine();
-                                if (int.TryParse(inputString, out int inputNumber) && inputNumber <= myIntNum.Count)
-                                {
-                                    Console.WriteLine("the number stored in index of {0} is {1}", inputNumber, myIntNum[inputNumber]);
-                                    Console.ReadKey();
-                                }
-                                else
-                                {
-                                    Console.WriteLine("please enter the valid index!");
-                                    Console.ReadKey();
-                                    continue;
-                                }
-
+                                IndexNumberShow();
                             }
                             break;
                         case 3:
                             {
                                 ShowAllElements();
-                                Console.ReadKey();
                             }
                             break;
                         case 4:
@@ -151,18 +137,38 @@
                 StoreNumber();
             }
         }
+        public static void IndexNumberShow()
+        {
+            Console.Write("please enter the index of number do you want to Show : ");
+            inputString = Console.ReadLine();
+            if (int.TryParse(inputString, out _) && int.Parse(inputString) <= myIntNum.Count)
+            {
+                Console.WriteLine("the number stored in index of {0} is {1}", int.Parse(inputString), myIntNum[int.Parse(inputString)]);
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("please enter the valid index!");
+                Console.ReadKey();
+                IndexNumberShow();
+            }
+        }
         public static void ShowAllElements()
         {
             if (myIntNum.Count == 0)
             {
                 Console.WriteLine("The list is empty!");
+                Console.ReadKey();
             }
-
-            int counter = 0;
-            foreach (int number in myIntNum)
+            else
             {
-                Console.WriteLine("the index of {0} is : {1}", counter, number);
-                counter++;
+                int counter = 0;
+                foreach (int number in myIntNum)
+                {
+                    Console.WriteLine("the index of {0} is : {1}", counter, number);
+                    counter++;
+                }
+                Console.ReadKey();
             }
         }
         public static int ShowBiggestIntNum()
