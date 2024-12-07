@@ -59,9 +59,12 @@ namespace MidTermProject
                                 CaseOpartors.ShowNumbersInRange();
                             }
                             break;
-
+                        case 10:
+                            {
+                                CaseOpartors.EditIndex();
+                            }
+                            break;
                     }
-
                 }
                 else if (CaseOpartors.inputString == "0")
                 {
