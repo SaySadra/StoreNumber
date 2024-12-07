@@ -210,5 +210,31 @@
                 }
             }
         }
+        public static void EditIndex()
+        {
+            Console.Write("please enter your index do you want to edit : ");
+            inputString = Console.ReadLine();
+            if (int.TryParse(inputString, out _))
+            {
+                Console.Write("enter number you want : ");
+                string inputString2 = Console.ReadLine();
+                if (int.TryParse (inputString, out _))
+                {
+                    myIntNum[int.Parse(inputString)] = int.Parse(inputString2);
+                    Console.WriteLine("the index of {0} is succesfully updated!",int.Parse(inputString));
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("please enter valid number!");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                Console.WriteLine("please enter valid index!");
+                Console.ReadKey();
+            }
+        }
     }
 }
