@@ -9,31 +9,17 @@
          static void Main(string[] args)
         {
 
-            while (true)
+            while(true)
             {
                 SetMenu();
 
-                if (int.TryParse(inputString, out inputMenu))
+                if (int.TryParse(inputString, out _))
                 {
-                    switch (inputMenu)
+                    switch (int.Parse(inputString))
                     {
                         case 1:
                             {
-                                Console.WriteLine("please enter your number you want to add");
-                                inputString = Console.ReadLine();
-                                if (int.TryParse(inputString, out _))
-                                {
-                                    myIntNum.Add(int.Parse(inputString));
-                                    Console.WriteLine("Your int number succesfully added!");
-                                    Console.ReadKey();
-                                }
-                                else
-                                {
-                                    Console.WriteLine("please enter the valid int number!");
-                                    Console.ReadKey();
-                                    continue;
-                                }
-
+                                StoreNumber();
                             }
                             break;
                         case 2:
@@ -147,6 +133,23 @@
             Console.WriteLine("PRESS(01)------Exit from APP.");
             Console.Write("which option do you want : ");
             inputString = Console.ReadLine();
+        }
+        public static void StoreNumber()
+        {
+            Console.Write("please enter your number you want to add : ");
+            inputString = Console.ReadLine();
+            if (int.TryParse(inputString, out _))
+            {
+                myIntNum.Add(int.Parse(inputString));
+                Console.WriteLine("Your int number succesfully added!");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("please enter the valid int number!");
+                Console.ReadKey();
+                StoreNumber();
+            }
         }
         public static void ShowAllElements()
         {
